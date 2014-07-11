@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Modulo PLC </string>
+    <string name="action_connect">Conectar</string>
+    <string name="action_arduinocode">Acerca de...</string>
+    <string name="action_disconnect">Desconectar</string>
+    <string name="action_settings"></string>
+
+</resources>

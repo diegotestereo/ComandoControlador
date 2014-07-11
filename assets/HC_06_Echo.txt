@@ -1,0 +1,3 @@
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#cd2828">Esta aplicacion fue implementada por "MdqAndroid", una empresa de Mar del Plata 
+dedicada al diseño  de aplicaciones Android para el uso de sistemas electronicos. </font><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d0d0d0">Contacto: diegogiovanazzi@gmail.com</font><br/>
