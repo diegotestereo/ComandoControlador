@@ -1,16 +1,20 @@
 package com.mdqandroid.comandocontrolador;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.TooManyListenersException;
 
 import com.mdqandroid.Bluetooth.BluetoothSerialClient;
 import com.mdqandroid.Bluetooth.BluetoothSerialClient.BluetoothStreamingHandler;
 import com.mdqandroid.Bluetooth.BluetoothSerialClient.OnBluetoothEnabledListener;
 import com.mdqandroid.Bluetooth.BluetoothSerialClient.OnScanListener;
-//import com.mdqandroid.comandocontrolador.BluetoothEcho.R;
+import com.mdqandroid.comandocontrolador.R;
+import com.mdqandroid.Comandos.*;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -30,11 +34,14 @@ import android.view.ViewConfiguration;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 /**
@@ -44,10 +51,12 @@ public class MainActivity extends Activity {
 	
 	private LinkedList<BluetoothDevice> mBluetoothDevices = new LinkedList<BluetoothDevice>();
 	private ArrayAdapter<String> mDeviceArrayAdapter;
-    private String R1="001",R2 ="002",R3="003",R4="004";
+    private String R1on="001",R1off="001",R2on ="002",R2off ="002",R3on="003",R3off="003"
+    		,R4on="004",R4off="004",R5on="001",R5off="002",R6on="006",R6off="006";
 	private EditText mEditTextInput;
 	private TextView mTextView;
-	private Button mButtonSend,btn_relay1,btn_relay2,btn_relay3,btn_relay4;
+	private Button mButtonSend,btn_relay1,btn_relay2,btn_relay3,btn_relay4,btn_temp;
+	private ToggleButton tbtn_rele1,tbtn_rele2,tbtn_rele3,tbtn_rele4,tbtn_rele5,tbtn_rele6;
 	private ProgressDialog mLoadingDialog;
 	private AlertDialog mDeviceListDialog;
 	private Menu mMenu;
@@ -64,13 +73,99 @@ public class MainActivity extends Activity {
 			 Toast.makeText(getApplicationContext(), "Cannot use the Bluetooth device.", Toast.LENGTH_SHORT).show();
 			 finish();
 		 }
+		 levantarXML();
 		 overflowMenuInActionBar();
 		 initProgressDialog();
 		 initDeviceListDialog();
-		 levantarXML();
+		botones();
 		 
 	}
 	
+	private void levantarXML() {
+		
+		mTextView = (TextView) findViewById(R.id.textViewTerminal);
+		mTextView.setMovementMethod(new ScrollingMovementMethod());
+		mEditTextInput = (EditText) findViewById(R.id.editTextInput);
+		
+		btn_temp=(Button) findViewById(R.id.btn_temp);
+		
+		tbtn_rele1= (ToggleButton) findViewById(R.id.tBtn_Rele1);
+		tbtn_rele2= (ToggleButton) findViewById(R.id.tBtn_Rele2);
+		tbtn_rele3= (ToggleButton) findViewById(R.id.tBtn_Rele3);
+		tbtn_rele4= (ToggleButton) findViewById(R.id.tBtn_Rele4);
+		tbtn_rele5= (ToggleButton) findViewById(R.id.tBtn_Rele5);
+		tbtn_rele6= (ToggleButton) findViewById(R.id.tBtn_Rele6);
+		
+		mButtonSend = (Button) findViewById(R.id.buttonSend);
+	
+	}
+	private void botones() {
+		
+		tbtn_rele1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked){sendStringData("Rele 1 Abierto");}
+				else{sendStringData("Rele 1 Cerrado");}
+						}
+		});
+		
+		tbtn_rele2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked){sendStringData("Rele 2 Abierto");}
+				else{sendStringData("Rele 2 Cerrado");}
+						}
+		});
+
+		tbtn_rele3.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if (isChecked){sendStringData("Rele 3 Abierto");}
+		else{sendStringData("Rele 3 Cerrado");}
+				}
+		});
+
+		tbtn_rele4.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if (isChecked){sendStringData("Rele 4 Abierto");}
+		else{sendStringData("Rele 4 Cerrado");}
+				}
+		});
+
+		tbtn_rele5.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if (isChecked){sendStringData("Rele 5 Abierto");}
+		else{sendStringData("Rele 5 Cerrado");}
+				}
+		});
+
+		tbtn_rele6.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if (isChecked){sendStringData("Rele 6 Abierto");}
+					else{sendStringData("Rele 6 Cerrado");}
+				}
+		});
+		
+		
+		
+		mButtonSend.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sendStringData(mEditTextInput.getText().toString());
+				mEditTextInput.setText("");
+			}
+		});
+	}
+
 	private void overflowMenuInActionBar(){
 		 try {
 		        ViewConfiguration config = ViewConfiguration.get(this);
@@ -93,9 +188,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-	enableBluetooth();
-
-		
+		enableBluetooth();
+	
 	}
 	
 	private void initProgressDialog() {
@@ -103,54 +197,7 @@ public class MainActivity extends Activity {
 		 mLoadingDialog.setCancelable(false);
 	}
 	
-	private void levantarXML() {
-		mTextView = (TextView) findViewById(R.id.textViewTerminal);
-		mTextView.setMovementMethod(new ScrollingMovementMethod());
-		mEditTextInput = (EditText) findViewById(R.id.editTextInput);
-		
-		//BOTONES
-		btn_relay1=(Button) findViewById(R.id.btn_relay1);
-		btn_relay1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendStringData(R1);
-				mEditTextInput.setText("");
-			}
-		});
-		btn_relay2=(Button) findViewById(R.id.btn_relay2);
-		btn_relay2.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendStringData(R2);
-				mEditTextInput.setText("");
-			}
-		});
-		btn_relay3=(Button) findViewById(R.id.btn_relay3);
-		btn_relay3.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendStringData(R3);
-				mEditTextInput.setText("");
-			}
-		});
-		btn_relay4=(Button) findViewById(R.id.btn_relay4);
-		btn_relay4.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendStringData(R4);
-				mEditTextInput.setText("");
-			}
-		});
-		
-		mButtonSend = (Button) findViewById(R.id.buttonSend);
-		mButtonSend.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendStringData(mEditTextInput.getText().toString());
-				mEditTextInput.setText("");
-			}
-		});
-	}
+	
 	
 	private void initDeviceListDialog() {
 		mDeviceArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_device);
@@ -214,8 +261,7 @@ public class MainActivity extends Activity {
 	    else
 	    	mTextView.scrollTo(0, 0);
 	}
-	
-	
+		
 	private void getPairedDevices() {
 		Set<BluetoothDevice> devices =  mClient.getPairedDevices();
 		for(BluetoothDevice device: devices) {

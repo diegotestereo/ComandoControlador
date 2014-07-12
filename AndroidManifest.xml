@@ -27,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+         <activity android:name="com.mdqandroid.Bluetooth.BluetoothSerialClient$BluetoothUpActivity" 
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|screenSize|keyboard"></activity>
     </application>
-
+        
+   
 </manifest>

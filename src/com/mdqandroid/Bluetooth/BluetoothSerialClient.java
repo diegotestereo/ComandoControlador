@@ -21,9 +21,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-/**
- * BluetoothSerialClient 
-  */
 public class BluetoothSerialClient {
 	
 	 
@@ -45,10 +42,7 @@ public class BluetoothSerialClient {
 	private OutputStream mOutputStream;
 	
 	
-	/**
-	 * BluetoothSerialClient
-	 *  * @return BluetoothSerialClient null.
-	 */
+	
 	public static BluetoothSerialClient getInstance() {
 		if(sThis == null) {
 			sThis = new BluetoothSerialClient();
@@ -80,11 +74,7 @@ public class BluetoothSerialClient {
 		sThis = null;
 	}
 	
-	/**
-	 
-	 * @param context activity 
-	 * @param onBluetoothEnabledListener on/off. 
-	 */
+	
 	public void enableBluetooth(Context context, OnBluetoothEnabledListener onBluetoothEnabledListener) {
 		if(!mBluetoothAdapter.isEnabled()) {
 			mOnBluetoothUpListener = onBluetoothEnabledListener;
@@ -106,14 +96,7 @@ public class BluetoothSerialClient {
 	}
 	
 	
-    /**
-     
-     * @param context 
-     * @param device 블루투스 디바이스. {@link getPairedDevices} 또는 {@link scanDevices} 를 통하여 가져온 블루투스 디바이스 인스턴스.
-     * @param bluetoothStreamingHandler 블루투스 스트리밍 핸들러. 
-     * @return 만약 블루투스를 사용할 수 없는 상태라면 false. {@link  enableBluetooth} 를 통하여 블루투스를 사용 가능한 상태로 만들어줘야 한다. 
-     */
-	public boolean connect(final Context context,final BluetoothDevice device, final BluetoothStreamingHandler bluetoothStreamingHandler) {
+   	public boolean connect(final Context context,final BluetoothDevice device, final BluetoothStreamingHandler bluetoothStreamingHandler) {
 		if(!isEnabled()) return false;
 		mConnectedDevice = device;
 		mBluetoothStreamingHandler = bluetoothStreamingHandler;
@@ -141,21 +124,12 @@ public class BluetoothSerialClient {
 	}
 	
 
-	/**
-	 * 과거에 페어링 되었던 블루투스 디바이스 목록을 가져온다.  
-	 * @return
-	 */
 	public Set<BluetoothDevice> getPairedDevices() {
 		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 		return pairedDevices;
 	}
 	
-	/**
-	 * 주변의 새 블루투스 디바이스를 스캔한다. 
-	 * @param context
-	 * @param OnScanListener 블루투스를 스캔 이벤트.  
-	 * @return
-	 */
+	
 	public boolean scanDevices(Context context, OnScanListener OnScanListener) {
 		if(!mBluetoothAdapter.isEnabled()) return false;
 		if(mBluetoothAdapter.isDiscovering()) {
@@ -175,10 +149,7 @@ public class BluetoothSerialClient {
 		return true;
 	}
 	
-	/**
-	 * 스캔을 취소한다.
-	 * @param context
-	 */
+	
 	public void cancelScan(Context context) {
 		if(!mBluetoothAdapter.isEnabled() || !mBluetoothAdapter.isDiscovering()) return;
 		mBluetoothAdapter.cancelDiscovery();
@@ -190,18 +161,12 @@ public class BluetoothSerialClient {
 		if(mOnScanListener != null) mOnScanListener.onFinish();
 	}
 	
-	/**
-	 * 블루투스 디바이스와 연결 되어있는지를 가져온다. 
-	 * @return true/false 
-	 */
+	
 	public boolean isConnection() {
 		return mIsConnection.get();
 	}
 	
-	/**
-	 * 연결된 블루투스 디바이스를 가져온다.
-	 * @return 만약 연결된 블루투스 디바이스가 없다면 null.
-	 */
+	
 	public BluetoothDevice getConnectedDevice() {
 		return mConnectedDevice;
 	}

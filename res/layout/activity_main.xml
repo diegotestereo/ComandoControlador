@@ -21,7 +21,7 @@
             android:id="@+id/textViewTerminal"
             android:layout_width="fill_parent"
             android:layout_height="96dp"
-            android:background="#fdfdff"
+            android:background="#fdfdd0"
             android:hint="Visualizacion de la consola"
             android:scrollbars="vertical"
             android:textSize="12sp" />
@@ -54,31 +54,103 @@
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fdfdd0"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btn_relay1"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rele 1" />
+                android:text="Control de Relays"
+                android:layout_gravity="center"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tBtn_Rele1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="R1" />
+
+                <ToggleButton
+                    android:id="@+id/tBtn_Rele2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="R2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tBtn_Rele3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="R1" />
+
+                <ToggleButton
+                    android:id="@+id/tBtn_Rele4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="R2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tBtn_Rele5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="R1" />
+
+                  <ToggleButton
+                      android:id="@+id/tBtn_Rele6"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="R2" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_light" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperatura: "
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:text="0°C"
+                android:textSize="16dp" />
 
             <Button
-                android:id="@+id/btn_relay2"
-                android:layout_width="match_parent"
+                android:id="@+id/btn_temp"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Rele 2" />
-
-            <Button
-                android:id="@+id/btn_relay3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rele 3" />
-
-            <Button
-                android:id="@+id/btn_relay4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rele 4" />
+                android:text="Consultar" />
 
         </LinearLayout>
 
