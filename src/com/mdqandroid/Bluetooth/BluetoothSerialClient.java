@@ -46,8 +46,8 @@ public class BluetoothSerialClient {
 	
 	
 	/**
-	 * BluetoothSerialClient 의 싱글 인스턴스를 가져온다.
-	 * @return BluetoothSerialClient 의 인스턴스. 만약 블루투스를 사용할 수 없는 기기라면 null.
+	 * BluetoothSerialClient
+	 *  * @return BluetoothSerialClient null.
 	 */
 	public static BluetoothSerialClient getInstance() {
 		if(sThis == null) {
@@ -83,7 +83,7 @@ public class BluetoothSerialClient {
 	/**
 	 
 	 * @param context activity 
-	 * @param onBluetoothEnabledListener 블루투스 on/off 에 대한 이벤트. 
+	 * @param onBluetoothEnabledListener on/off. 
 	 */
 	public void enableBluetooth(Context context, OnBluetoothEnabledListener onBluetoothEnabledListener) {
 		if(!mBluetoothAdapter.isEnabled()) {
